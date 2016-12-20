@@ -1,7 +1,7 @@
 cdef extern from "stdbool.h":
     pass
 
-cdef extern from  "m3api/xiApi.h":
+cdef extern from  "xiApi.h":
 
     ctypedef int XI_RETURN
     ctypedef unsigned DWORD
@@ -248,7 +248,7 @@ cdef extern from  "m3api/xiApi.h":
     #    Returns the pointer to the number of all discovered devices.
     #    @param[out] pNumberDevices           number of discovered devices
     #    @return XI_OK on success, error value otherwise.
-    XI_RETURN __cdecl xiGetNumberDevices(PDWORD pNumberDevices)
+    XI_RETURN xiGetNumberDevices(PDWORD pNumberDevices)
     # '''
     #    Get device parameter
 

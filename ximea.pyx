@@ -46,7 +46,10 @@ def get_device_count():
     handle_xi_error( xi.xiGetNumberDevices(&num) )
     return num
 
-def get_device_info(xi.DWORD DevID, const char* parameter_name):
+
+
+def get_device_info(xi.DWORD DevID, parameter_name):
+    parameter_name = parameter_name.encode("utf-8")
     """
     devID: device id (0-n)
     parameter_name:
@@ -56,8 +59,9 @@ def get_device_info(xi.DWORD DevID, const char* parameter_name):
         "device_inst_path"
     """
     cdef char[512] info
+
     handle_xi_error(xi.xiGetDeviceInfoString(DevID,parameter_name,info,len(parameter_name) ) )
-    return info
+    return info.decode("utf-8")
 
 cdef class Xi_Camera:
     cdef xi.HANDLE _xi_device
@@ -81,7 +85,8 @@ cdef class Xi_Camera:
     def __init__(self, xi.DWORD DevID=-1,const char* user_id=NULL,const char* serial=NULL,const char* hw_path=NULL):
         self.aquisition_active = False
 
-    def set_param(self,const char* param_name,value):
+    def set_param(self,param_name,value):
+        param_name = param_name.encode("utf-8")
         '''
         set paramter:
         param_name : see constants.py
@@ -93,11 +98,13 @@ cdef class Xi_Camera:
         elif type(value) == float:
             handle_xi_error( xi.xiSetParamFloat(self._xi_device,param_name,value))
         elif type(value) == str:
+            value = value.encode("utf-8")
             handle_xi_error( xi.xiSetParamString(self._xi_device,param_name,<char*>value,len(value)))
         else:
             logger.warning("value is not int,float or string")
 
-    def get_param(self,const char* param_name,type_hint=None):
+    def get_param(self,param_name,type_hint=None):
+        param_name = param_name.encode("utf-8")
         '''
         get paramter:
         param_name : see constants.py
@@ -117,7 +124,7 @@ cdef class Xi_Camera:
             elif type_hint == str:
                 string
                 handle_xi_error( xi.xiGetParamString(self._xi_device,param_name,string,len(string)))
-                return string
+                return string.decode("utf-8")
 
         else:
             try:
@@ -136,7 +143,7 @@ cdef class Xi_Camera:
                 pass
             string
             handle_xi_error( xi.xiGetParamString(self._xi_device,param_name,string,len(string)))
-            return string
+            return string.decode("utf-8")
 
 
     cdef start_aquisition(self):

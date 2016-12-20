@@ -1,1 +1,2 @@
-from ximea import *
+from pyximea.ximea import *
+#import constants
