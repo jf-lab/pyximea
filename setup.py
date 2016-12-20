@@ -16,7 +16,7 @@ if platform.system() == 'Darwin':
     libs = []
 elif platform.system() == 'Windows':
     includes = [numpy.get_include(), r"C:\XIMEA\API"]
-    libs = ['m3apiX64', 'xiapi64']
+    libs = ['m3apiX64']
     lib_dirs=[r".\pyximea"]
     link_args = []
     print("windows")
@@ -51,5 +51,5 @@ setup(  name="pyximea",
         url="https://github.com/cyanut/pyximea",
         license="GPL",
         packages=['pyximea'],
-        package_data ={'pyximea': ['m3apiX64.dll', 'xiapi64.dll']}
+        package_data ={'pyximea': ['m3apiX64.dll']}
 )
