@@ -1,3 +1,5 @@
+from setuptools import setup
+
 import os, platform
 import numpy
 
@@ -37,8 +39,10 @@ extensions = [
             ),
 ]
 
-setup(  name="ximea",
-        version="0.0.1",
+setup(  name="pyximea",
+        version="0.0.2",
         description="Ximea XiAPI Python Bindings",
-        ext_modules=cythonize(extensions)
+        ext_modules=cythonize(extensions),
+        url="https://github.com/cyanut/pyximea",
+        license="GPL"
 )
