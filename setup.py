@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, Distribution
 
 import os, platform
 import numpy
@@ -17,20 +17,25 @@ if platform.system() == 'Darwin':
 elif platform.system() == 'Windows':
     includes = [numpy.get_include(), r"C:\XIMEA\API"]
     libs = ['m3apiX64', 'xiapi64']
-    lib_dirs=[r"C:\XIMEA\API\x64"]
+    lib_dirs=[r".\pyximea"]
     link_args = []
+    print("windows")
 else:
     includes = [numpy.get_include()]
     link_args = ['m3api']
     libs = []
 
 
+class BinaryDistribution(Distribution):
+    def has_ext_modules(foo):
+        return True
+
 
 # extra_objects=["../build/libnanovg.a"]
 
 extensions = [
-    Extension(  name="ximea",
-                sources=['ximea.pyx'],
+    Extension(  name="pyximea.ximea",
+                sources=['pyximea/ximea.pyx'],
                 include_dirs = includes,
                 libraries = libs,
                 library_dirs=lib_dirs,
@@ -44,5 +49,7 @@ setup(  name="pyximea",
         description="Ximea XiAPI Python Bindings",
         ext_modules=cythonize(extensions),
         url="https://github.com/cyanut/pyximea",
-        license="GPL"
+        license="GPL",
+        packages=['pyximea'],
+        package_data ={'pyximea': ['m3apiX64.dll', 'xiapi64.dll']}
 )
