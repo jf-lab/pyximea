@@ -4,7 +4,7 @@ pyximea
 Python bindings for ximea XiAPI
 
 ## Requirement
-python3
+python3, numpy
 
 ## example code
 ```python
