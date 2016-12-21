@@ -17,13 +17,13 @@ cam.close()
 
 ## installing
 ###Linux (Arch)
-install ximea driver using the `PKGBUILD` in the repo
+install ximea driver using the `PKGBUILD` in the repo, then
 ```bash
 cd your_local_clone
 python setup.py build_ext -i
 ```
 ###MacOS
-install ximea framework
+install ximea framework, then
 ```bash
 cd your_local_clone
 python setup.py build_ext -i
