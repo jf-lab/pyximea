@@ -15,17 +15,19 @@ img =  cam.get_image()
 cam.close()
 ```
 
-
 ## installing
 ###Linux (Arch)
 install ximea driver using the `PKGBUILD` in the repo
+```bash
 cd your_local_clone
 python setup.py build_ext -i
-
+```
 ###MacOS
 install ximea framework
+```bash
 cd your_local_clone
 python setup.py build_ext -i
+```
 
 ###Windows
 install wheel package in the `dist` folder, require python3.5
