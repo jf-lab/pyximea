@@ -21,9 +21,9 @@ elif platform.system() == 'Windows':
     link_args = []
     print("windows")
 else:
-    includes = [numpy.get_include()]
-    link_args = ['m3api']
-    libs = []
+    includes = [numpy.get_include(), r"/usr/include/m3api"]
+    link_args = []
+    libs = ["m3api"]
 
 
 class BinaryDistribution(Distribution):
